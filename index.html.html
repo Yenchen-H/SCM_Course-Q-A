@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>供應鏈管理系｜課程常見問題公告</title>
+  <meta name="description" content="供應鏈管理系課程常見問題。" />
+  <style>
+    :root {
+      --bg: #f3f6fa;
+      --bg-2: #eaf0f7;
+      --surface: #ffffff;
+      --surface-soft: #f9fbfd;
+      --line: #d8e1ec;
+      --line-strong: #c2cfdd;
+      --text: #24364d;
+      --muted: #5e728b;
+      --heading: #19314f;
+      --school: #204a87;
+      --q-bg: #eaf2fb;
+      --q-text: #1f4f86;
+      --a-bg: #f7f2e8;
+      --a-text: #77552c;
+      --tag-bg: #eef3f8;
+      --shadow: 0 8px 24px rgba(41, 63, 98, .06);
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 40%, var(--bg-2) 100%);
+      min-height: 100vh;
+      line-height: 1.9;
+      overflow-x: hidden;
+    }
+
+    .glow, .glow-2, body::before { display: none; }
+
+    .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    .hero { padding: 28px 0 18px; }
+
+    .hero-card, .qa-item, .tip {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      padding: 34px 38px;
+      border-top: 5px solid var(--school);
+    }
+
+    .eyebrow, .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: .45rem .9rem;
+      border-radius: var(--radius-pill);
+      font-size: 1rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--tag-bg);
+      color: var(--school);
+      white-space: nowrap;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--school);
+    }
+
+    .top-row, .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+    h1 {
+      margin: 16px 0 14px;
+      font-size: clamp(2.5rem, 4.5vw, 3.6rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      color: var(--heading);
+    }
+    .lead {
+      margin: 0;
+      max-width: 860px;
+      font-size: 1.22rem;
+      color: var(--muted);
+    }
+    .approval-note {
+      margin: 16px 0 0;
+      color: #61778f;
+      font-size: 1.05rem;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .content { padding: 10px 0 56px; }
+    .tip {
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      background: #fbfdff;
+    }
+    .muted { color: var(--muted); font-size: 1.1rem; font-weight: 500; }
+
+    .faq-list { display: grid; gap: 18px; }
+    .qa-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .qa-item.open { border-color: var(--line-strong); }
+
+    .qa-trigger {
+      width: 100%; border: 0; background: transparent; color: inherit; text-align: left;
+      padding: 24px 28px; display: grid; grid-template-columns: 1fr auto; gap: 16px; cursor: pointer;
+    }
+    .qa-trigger:hover { background: #fbfdff; }
+
+    .qa-kicker {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px;
+      color: #647b96; font-size: 1rem; font-weight: 700;
+    }
+    .qa-kicker .badge:first-child {
+      background: var(--q-bg);
+      color: var(--q-text);
+      border-color: #cfe0f3;
+      min-width: 56px;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .qa-question {
+      margin: 0;
+      font-size: 1.46rem;
+      font-weight: 800;
+      line-height: 1.6;
+      color: var(--heading);
+    }
+
+    .chevron-wrap {
+      width: 48px; height: 48px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--line); background: #f8fafc; flex-shrink: 0;
+    }
+    .chevron { width: 18px; height: 18px; color: #5f7590; transition: transform .18s ease; }
+    .qa-item.open .chevron { transform: rotate(180deg); }
+
+    .qa-content { display: none; border-top: 1px solid var(--line); padding: 0 28px 26px; background: var(--surface-soft); }
+    .qa-item.open .qa-content { display: block; }
+    .answer {
+      padding-top: 20px;
+      color: #324b66;
+      font-size: 1.14rem;
+    }
+    .answer::before {
+      content: "A";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      margin-right: .7rem;
+      margin-bottom: .65rem;
+      background: var(--a-bg);
+      color: var(--a-text);
+      font-weight: 800;
+      vertical-align: middle;
+    }
+    .answer p, .answer ul { margin-top: 0; }
+    .answer p { margin-bottom: 12px; }
+    .answer ul { padding-left: 1.25rem; margin-bottom: 0; }
+    .answer li + li { margin-top: 10px; }
+    .answer strong { color: #1c395e; }
+    mark {
+      color: #284c79;
+      background: #e6eef8;
+      padding: 0 .26em;
+      border-radius: .22em;
+    }
+
+    .footer-note {
+      padding: 4px 0 36px;
+      color: #73879e;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100%, calc(100% - 20px)); }
+      .hero-card { padding: 24px 20px; }
+      .tip, .qa-trigger, .qa-content { padding-left: 18px; padding-right: 18px; }
+      h1 { font-size: 2.2rem; }
+      .lead { font-size: 1.08rem; }
+      .qa-question { font-size: 1.22rem; }
+      .answer { font-size: 1.05rem; }
+    }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+
+  <header class="hero">
+    <div class="shell">
+      <section class="hero-card" aria-labelledby="page-title">
+        <div class="top-row">
+          <span class="eyebrow">Course FAQ</span>
+          <span class="badge">供應鏈管理系</span>
+        </div>
+        <h1 id="page-title">課程常見問題 Q&amp;A</h1>
+        <p class="lead">彙整本系學生常見之課程相關問題，方便同學查閱修課規定與辦理方式。</p>
+        <p class="approval-note">經 114 學年第 2 學期第 2 次系務會議決議通過</p>
+      </section>
+    </div>
+  </header>
+
+  <main class="shell content">
+    <section class="tip" aria-label="選課提醒">
+      <div class="meta-row">
+        <span class="badge">選課提醒</span>
+        <span class="muted">第一週務必到課，老師是否願意加開名額，常會參考學生的實際出席與修課意願。</span>
+      </div>
+    </section>
+
+    <section id="faqList" class="faq-list" aria-label="Q&A 內容區">
+      <article class="qa-item open" data-search="想修的選修課 名額滿了 怎麼辦 第一週 到課 加開名額 補救補選" id="q1">
+<button aria-controls="panel-q1" aria-expanded="true" class="qa-trigger">
+<div>
+<div class="qa-kicker"><span class="badge">Q1</span><span>選修 / 加選</span></div>
+<h2 class="qa-question">想修的選修課名額滿了怎麼辦？</h2>
+</div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q1"><div class="answer"><p>建議同學<strong>第一週一定要到課</strong>。第一週除了能了解課程規定與內容，出席狀況往往也是老師評估是否願意加開名額的重要依據。</p><p>若老師同意加開名額，請於校訂的 <mark>補救補選</mark> 階段上網申請加選。</p></div></div>
+</article><article class="qa-item" data-search="必修 被當 外系 進修部 抵免 同名稱 同學分數 同修業別 停修" id="q2">
+<button aria-controls="panel-q2" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q2</span><span>必修 / 抵免</span></div><h2 class="qa-question">我有必修課程被當掉，可否改修其他學制（如進修部）或外系課程來抵免？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q2"><div class="answer"><p>若必修課程不及格，原則上得修讀本校他系或他校（限國立大學）開設之 <mark>同名稱、同學分數、同修業別</mark> 課程，並依規定辦理認列。</p><p>但若是因為 <mark>停修</mark> 導致第一次未在本系完成修課，則不得至外系修讀相同課程來抵充該必修。</p><p>另，若欲以進修部四技課程抵充，僅限應屆畢業生及延修生修讀。</p></div></div>
+</article><article class="qa-item" data-search="當學期 必修課 退選 以後再修 延後進度 增加負擔" id="q3">
+<button aria-controls="panel-q3" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q3</span><span>必修 / 退選</span></div><h2 class="qa-question">當學期的必修課可否退選，以後再修？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q3"><div class="answer"><p>原則上<strong>可以退選</strong>，但並不建議。系上將科目列為必修，代表它對後續專業課程銜接具有基礎性的重要性。</p><p>退選後未來學期仍需重新選課並修習通過，等於 <mark>延後修課進度</mark>，也增加後續負擔。</p></div></div>
+</article><article class="qa-item" data-search="外系選修 學分 院 系 開設 外語教育中心 通識博雅中心" id="q4">
+<button aria-controls="panel-q4" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q4</span><span>選修 / 外系學分</span></div><h2 class="qa-question">什麼樣的課程可以算入外系選修學分？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q4"><div class="answer"><p>符合以下條件的課程，可認列為本系外系選修學分：</p><ul><li>由<strong>院、系</strong>開設的課程，例如海洋商務學院航運管理學系開設的課程。</li><li><strong>外語教育中心</strong>及<strong>通識博雅中心</strong>所開設的課程，<mark>不列入</mark>外系選修學分。</li></ul></div></div>
+</article><article class="qa-item" data-search="重修 必修課 不再開設 系辦 系主任 性質相近 抵充" id="q5">
+<button aria-controls="panel-q5" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q5</span><span>重修 / 必修</span></div><h2 class="qa-question">如果我要重修的必修課，系上已不再開設，該怎麼辦？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q5"><div class="answer"><p>請直接洽詢 <strong>系辦</strong> 或 <strong>系主任</strong>。系上會視情況安排名稱或性質相近的課程，供修習並抵充原本的必修課。</p></div></div>
+</article><article class="qa-item" data-search="轉學生 轉系生 相同 類似課程 學分抵免 歷年成績單 課程大綱" id="q6">
+<button aria-controls="panel-q6" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q6</span><span>抵免 / 轉學生</span></div><h2 class="qa-question">我是轉學生或轉系生，之前已修過相同或類似課程，要如何辦理學分抵免？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q6"><div class="answer"><p>因不同學校或不同科系的課程名稱與內容可能略有差異，請本人攜帶以下文件，親洽系辦或系主任討論：</p><ul><li>歷年成績單</li><li>擬申請抵免課程之 <mark>課程大綱紙本</mark></li></ul><p>經確認符合抵免資格後，再至本校系統辦理線上學分抵免申請。抵免申請之辦理次數與受理期間，依本校相關規定及公告時程辦理。</p></div></div>
+</article><article class="qa-item" data-search="低年級 高年級 選修課 限修條件 先修 基礎課程" id="q7">
+<button aria-controls="panel-q7" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q7</span><span>選修 / 修課年級</span></div><h2 class="qa-question">本系低年級學生可以修高年級的選修課嗎？高年級學生可以修低年級的選修課嗎？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q7"><div class="answer"><p>可以。<strong>選修課原則上不以年級作為限制</strong>。</p><p>但若低年級要修高年級選修課，仍建議先評估自己的專業基礎是否足以理解課程內容，並事先查閱課程大綱，留意是否有 <mark>限修條件</mark> 或建議先修的基礎課程。</p></div></div>
+</article><article class="qa-item" data-search="大學部 修習 碩士班課程 認列學分 重複認列 本系專業選修" id="q8">
+<button aria-controls="panel-q8" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q8</span><span>學分 / 碩士班課程</span></div><h2 class="qa-question">我是大學部學生，可否修習本系碩士班課程？修了之後怎麼認列學分？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q8"><div class="answer"><p>可以修習本系碩士班課程。</p><ul><li>若<strong>沒有</strong>繼續攻讀本系碩士班：已修碩士班課程的學分，可作為大學部畢業之本系專業選修學分。</li><li>若<strong>日後要</strong>繼續攻讀本系碩士班，並想將該課程抵免碩士學分：該科目 <mark>不得同時</mark> 納入大學部畢業學分。</li></ul><p>也就是說，同一科目的學分不得重複認列於大學部與碩士班。</p></div></div>
+</article><article class="qa-item" data-search="外系 必修課 外系選修學分 認列" id="q9">
+<button aria-controls="panel-q9" aria-expanded="false" class="qa-trigger">
+<div><div class="qa-kicker"><span class="badge">Q9</span><span>外系 / 學分認列</span></div><h2 class="qa-question">外系的必修課，可以認列為本系的外系選修學分嗎？</h2></div>
+<span class="chevron-wrap"><svg aria-hidden="true" class="chevron" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<div class="qa-content" id="panel-q9"><div class="answer"><p>可以。外系的必修課，得列入本系規定之外系選修學分數內。</p></div></div>
+</article>
+    </section>
+  </main>
+
+  <div class="shell footer-note">如有未盡事宜，請依本校最新選課準則辦理，或逕洽系辦公室確認。</div>
+
+  <script>
+    const items = [...document.querySelectorAll('.qa-item')];
+    const triggers = [...document.querySelectorAll('.qa-trigger')];
+
+    function setExpanded(item, expand) {
+      const btn = item.querySelector('.qa-trigger');
+      item.classList.toggle('open', expand);
+      btn.setAttribute('aria-expanded', String(expand));
+    }
+
+    triggers.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.qa-item');
+        setExpanded(item, !item.classList.contains('open'));
+      });
+    });
+  </script>
+</body>
+</html>
